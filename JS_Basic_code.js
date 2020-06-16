@@ -314,3 +314,50 @@ parseInt(el); //this will change el to an int format this function callback a 2 
 
 let el = "2";
 Number(el);   // this just change to float or int , if el is 2.4 remains 2.5 after Number();
+
+
+************************************************************************************************************************************************************************************************
+#Set //method difference inplementation
+
+let difference = (setA, setB) => {
+  let _dif = new Set(setA);
+  for (let elem of setB){
+    _dif.delete(elem)
+  }
+  return _dif
+}
+
+// superset implementation 
+let isSuperSet = (set,subset) =>{
+  for (let elem of subset){
+    if (!set.has(elem))
+      return false
+  }
+  return true
+}
+
+// using superset how to determine if all characters in a word are contains in a given word. solved using doble direction superset function check
+let hola = "love\ncomo velo llove juni ovele";
+let words = hola.split(/\n|\s/);
+console.log("[Input]:\n" + hola);
+let count = 0
+let letters = new Set()
+for (let l of words[0]){
+
+  letters.add(l) 
+}
+
+words.splice(0,1)  // removes first element    // at position 0 , removes 1 element , and not adding new elements there is no third element in this invocation to splice
+console.log(words)
+
+
+words.map(el => {
+  let neword = new Set();
+  for (let l of el){
+    neword.add(l)
+    }
+   
+    if (isSuperSet(letters,neword) && isSuperSet(neword,letters)) 
+      count++
+})
+console.log(count) // returns how many words in the input have all letters cotains in the given word
